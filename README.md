@@ -26,19 +26,19 @@
 <br>
 
 ### 네트워크
----
+
 
 ### 데이터베이스
----
+
 - [Transaction](https://github.com/SYSOUT-org/CS-Study/tree/master/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/Transaction)
 
 
 ### 소프트웨어공학
----
+
 
 ### 운영체제
----
+
 
 ### 자료구조
----
+
 
