@@ -59,9 +59,9 @@ update user set balance = balance - 1000 where id = 1;
 
 - 먼저 MySQL 에선 Transaction 을 위한 Transaction Control Language 을 몇 가지 만들었다
 - BEGIN 으로 트랜잭션 시작을 선언, 그럼 MySQL 은 id 를 부여해서 트랜잭션을 식별
-- 시작될 때의 데이터 스냅샷을 찍어서 별도로 백업한다 이렇게 백업된 데이터를 Undo Log 라고 한다
+- 어떤 데이터가 변경될려고 할 때, 그 데이터 스냅샷을 찍어서 별도로 백업한다 이렇게 백업된 데이터를 Undo Log 라고 한다
 - 변경 사항들은 실제 디스크에 쓰여지다가, COMMIT 을 하면서 트랜잭션 끝을 선언, 적당한 타이밍에 Undo Log 를 없앰
-- 만약에 도중에 문제가 생겼을 시 ROLLEBACK, 언두로그가 디스크에 다시 쓰여짐 이렇게 Atomic 과 Consistency 를 보장
+- 만약에 도중에 문제가 생겼을 시 ROLLBACK, 언두로그가 디스크에 다시 쓰여짐 이렇게 Atomic 과 Consistency 를 보장
 
 ---
 
