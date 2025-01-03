@@ -112,9 +112,8 @@ DEFAULT 설명에 따르면, 본인이 사용하는 DB의 기본 격리 수준�
                 <details>
                 <summary><b> 반복 읽기 불가능(Non-Repeatable Read) </b></summary>
                   <div markdown="1">
-                    <img src="https://github.com/user-attachments/assets/f4a4b70e-a6fe-4107-9d6f-2b08866216dc" alt="참고: 망나니 개발자" />
-                    <p> 참고: 망나니 개발자 </p>
-                  <li>READ COMMITED에서 반복 읽기를 수행하면 다른 트랜잭션의 커밋 여부에 따라 조회 결과가 달라질 수 있다.</li>
+                    <img src="https://github.com/user-attachments/assets/f4a4b70e-a6fe-4107-9d6f-2b08866216dc" alt="image" />
+                  READ COMMITED에서 반복 읽기를 수행하면 다른 트랜잭션의 커밋 여부에 따라 조회 결과가 달라질 수 있다.
                   </div>
                 </details>
             </li>
@@ -124,17 +123,15 @@ DEFAULT 설명에 따르면, 본인이 사용하는 DB의 기본 격리 수준�
         <strong>READ UNCOMMITED</strong>
         <ul>
             <li>다른 트랜잭션에서 커밋되지 않은 내용에 접근 가능(Dirty Read)
-                <ul>
-                    <li>오손 읽기(Dirty Read) 참고 이미지</li>
-                    <img src="https://github.com/user-attachments/assets/a33090ea-e153-46a1-93c0-29f63b125e17" alt="image" />
-                        <img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/58df78ad-133e-4a90-9f64-75aabb5b3aa4/image.png" alt="Dirty Read 이미지" />
-                    <li>위 이미지만 보면 괜찮아 보인다. 하지만 아래 상황에서는 어떠한가?</li>
-                    <li>
-                        <img src="https://prod-files-secure.s3.us-west-2.amazonaws.com/58df78ad-133e-4a90-9f64-75aabb5b3aa4/0e0c05ec-159a-4c9d-b50a-3d1f377d8f2e/image.png" alt="상황 이미지" />
-                    </li>
-                    <li>사용자 B는 id=51인 데이터에 대해 처리를 진행하고 있는데, 조회해보니 결과가 존재하지 않으면 시스템에 상당한 버그를 초래한다.</li>
-                    <li>→ READ UNCOMMITED는 RDBMS 표준에서 인정하지 않을 정도로 정합성에 문제가 많은 격리 수준임</li>
-                </ul>
+                  <details>
+<summary><b> 오손 읽기(Dirty Read) </b></summary>
+<div markdown="1">
+<img src="https://github.com/user-attachments/assets/927dc86c-59e1-43d1-9759-92eb9f037ff4" alt="image" />
+  위 이미지만 보면 괜찮아 보인다. 하지만 아래 상황에서는 어떠한가?
+<img src="https://github.com/user-attachments/assets/28847c44-ae21-4da1-a80d-2e589fd29d81" alt="image" />
+  사용자 B는 id=51인 데이터에 대해 처리를 진행하고 있는데, 조회해보니 결과가 존재하지 않으면 시스템에 상당한 버그를 초래한다. → READ UNCOMMITED는 RDBMS 표준에서 인정하지 않을 정도로 정합성에 문제가 많은 격리 수준임
+</div>
+</details>
             </li>
         </ul>
     </li>
