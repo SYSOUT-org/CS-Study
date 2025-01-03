@@ -136,7 +136,7 @@ DEFAULT 설명에 따르면, 본인이 사용하는 DB의 기본 격리 수준�
         </ul>
     </li>
 </ol>
-
+<br>
 <table>
     <tr>
         <th></th>
@@ -169,3 +169,14 @@ DEFAULT 설명에 따르면, 본인이 사용하는 DB의 기본 격리 수준�
         <td>없음</td>
     </tr>
 </table>
+
+<h2>왜 MySQL만 DEFAULT 설정이 REPEATABLE READ인가 → 갭 락이란?</h2>
+
+<h3>MySQL의 스토리지 엔진 레벨의 락</h3>
+<ul>
+    <li>레코드 락 (Record Lock)</li>
+    <li>갭 락 (Gap Lock)</li>
+    <li>넥스트 키 락 (Next Key Lock)</li>
+    <li>자동 증가 락 (Auto Increment Lock)</li>
+</ul>
+
