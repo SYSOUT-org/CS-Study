@@ -240,3 +240,11 @@ Serializable이 아니라면 성능에서 크게 저하가 발생하지 않는�
 - Redis, Zookeeper, Consul 같은 도구를 사용해 구현한다.
 
 각각의 락은 비즈니스 요구사항에 따라 적절히 선택해야 한다. 주로 수정을 더 많이 한다면 Pessimistic을, 읽기의 비중이 더 높다면 Optimistic을 사용한다.
+
+
+## 🔗 참고 자료
+- 갱신분실, 모순성, 연쇄복귀 (https://m.blog.naver.com/bbbisskk2/222963702095)
+- 트랜잭션 특성 (https://jindevelopetravel0919.tistory.com/48)
+- 트랜잭션 특징 (https://mommoo.tistory.com/62)
+- 전반적인 트랜잭션 정리 (https://inpa.tistory.com/entry/MYSQL-%F0%9F%93%9A-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98Transaction-%EC%9D%B4%EB%9E%80-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC)
+- 트랜잭션 격리 수준 (https://mangkyu.tistory.com/299)
