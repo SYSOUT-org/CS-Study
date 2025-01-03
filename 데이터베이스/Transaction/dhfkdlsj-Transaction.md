@@ -169,3 +169,8 @@
 - 각 DBMS의 공식 문서를 참고하여 동작 방식을 이해하고 적절히 사용해야 합니다.
 - concurrency control은 serializability, recoverability, 그리고 이와 관련된 isolation level을 제공합니다.
 - DBMS에서 concurrency control를 구현 하는데에 기본이 되는 락과 MVCC등을 더 공부해보면 좋을 것 같습니다.
+
+---
+### 참고 문헌
+- https://easy-code-yo.tistory.com/26
+- https://hello-judy-world.tistory.com/195
