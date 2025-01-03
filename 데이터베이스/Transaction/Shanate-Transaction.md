@@ -32,7 +32,8 @@ Commit 연산, Rollback 연산
 
 ## 트랜잭션의 상태
 
-![[https://inpa.tistory.com/entry/MYSQL-📚-트랜잭션Transaction-이란-💯-정리](https://inpa.tistory.com/entry/MYSQL-%F0%9F%93%9A-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98Transaction-%EC%9D%B4%EB%9E%80-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC)](https://prod-files-secure.s3.us-west-2.amazonaws.com/03205dcf-f90c-4bd9-8281-674e7b939609/4d12251c-118a-4bd7-abb7-5f9f24bd438f/image.png)
+![image](https://github.com/user-attachments/assets/8604b0e3-e538-40df-aafc-6e3405f07f8f)
+)
 
 [https://inpa.tistory.com/entry/MYSQL-📚-트랜잭션Transaction-이란-💯-정리](https://inpa.tistory.com/entry/MYSQL-%F0%9F%93%9A-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98Transaction-%EC%9D%B4%EB%9E%80-%F0%9F%92%AF-%EC%A0%95%EB%A6%AC)
 
