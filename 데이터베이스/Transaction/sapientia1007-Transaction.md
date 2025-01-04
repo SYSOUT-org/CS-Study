@@ -113,7 +113,7 @@ ex) 은행 계좌 이체 중 시스템 장애가 발생하면, 모든 작업을 
 | write_item(A → X); |                         | X = 1100        |
 |                    | B = read_item(X);       |                 |
 |                    | B = B * 3;              |                 |
-|                    | write_item(B  → X);     | X = 3300        |
+|                    | write_item(B → X);     | X = 3300        |
 | C = read_item(Y)   |                         | Y = 100         |
 | C = C - 50         |                         |                 |
 | 실패 => 롤백        |                        |                  |
@@ -271,4 +271,5 @@ java.sql.SQLException: Connection is read-only. Queries leading to data modifica
 > 출처    
 https://dev-coco.tistory.com/72    
 https://velog.io/@shasha/Database-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%A0%95%EB%A6%AC     
-https://doooyeon.github.io/2018/09/28/transaction.html
+https://doooyeon.github.io/2018/09/28/transaction.html    
+MYSQL로 배우는 데이터베이스
