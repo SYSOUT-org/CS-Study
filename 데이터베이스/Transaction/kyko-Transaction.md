@@ -187,17 +187,16 @@ REPEATABLE READ는 새로운 레코드의 추가는 막지 않는다. 그렇기�
 
 <img src="https://github.com/user-attachments/assets/d94a3c35-2238-4829-a89b-e9f9d54d911a" alt="image" />
 
+MVCC를 통해 자신보다 먼저 실행된 트랜잭션의 데이터만 조회한다고 했는데, 왜 위 그림처럼 나중에 실행된 트랜잭션의 데이터도 조회되는가??
+-> 배타락(SHARED FOR UPDATE), 공유락(SHARED FOR READ)로 레코드를 조회하는 경우 언두 영역의 데이터가 아니라 테이블의 레코드를 가져오게 된다. 이로 인해 유령 읽기가 발생한다.
+
+<b>BUT!! MySQL에서는 유령 읽기를 예방할 수 있다!!!</b>
+<img src="https://github.com/user-attachments/assets/bae00277-9b96-46bb-aa0e-85385e1d5644" alt="image" />
+MySQL에서는 사용자 B가 SELECT FOR UPDATE로 데이터를 조회한 경우 id=50인 레코드에는 레코드 락을, id>50인 범위에는 갭 락으로 넥스트 키 락을 건다. 그렇기에 사용자 A가 id=51인 member를 INSERT 하더라도, B의 트랜잭션이 종료될 때까지 기다리다가, COMMIT한다.
 
 </div>
 </details>
 
 <h2>왜 MySQL만 DEFAULT 설정이 REPEATABLE READ인가 → 갭 락이란?</h2>
-
-<h3>MySQL의 스토리지 엔진 레벨의 락</h3>
-<ul>
-    <li>레코드 락 (Record Lock)</li>
-    <li>갭 락 (Gap Lock)</li>
-    <li>넥스트 키 락 (Next Key Lock)</li>
-    <li>자동 증가 락 (Auto Increment Lock)</li>
-</ul>
+나중에 개인 블로그에서 따로 정리하려고 합니다...
 
