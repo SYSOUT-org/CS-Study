@@ -205,9 +205,9 @@ Undo Log는 Undo Log Buffer 형태로 메모리에 저장, 특점 시점에 디�
 
 <img src="https://github.com/user-attachments/assets/6c97db60-478d-4503-a710-d1fcb9dea2a6" alt="READ COMMITTED - NON-REPEATABLE READ" width="800"/>
 
-- 💥 NON-REPEATABLE READ 발생 
-  - 2번 트랜잭션에서 동일한 select 쿼리를 실행했을 때, 다른 결과가 조회되는 것을 알 수 있다. 5번 트랜잭션의 커밋 전, 후에 select 쿼리를 실행했기 때문이다. 
-  - 이는 트랜잭션의 일관성을 해치는 문제로, 두 가지 해결 방법이 존재한다. 
+💥 NON-REPEATABLE READ 발생 
+- 2번 트랜잭션에서 동일한 select 쿼리를 실행했을 때, 다른 결과가 조회되는 것을 알 수 있다. 5번 트랜잭션의 커밋 전, 후에 select 쿼리를 실행했기 때문이다. 
+- 이는 트랜잭션의 일관성을 해치는 문제로, 두 가지 해결 방법이 존재한다. 
     - 5번 트랜잭션이 commit이나 rollback이 될 때까지 2번 트랜잭션의 실행을 지연하는 것 (Oracle)
     - Multiversion Concurrency Control(MVCC)을 사용하는 REPEATABLE READ를 사용하는 것 (MySQL)
 </br>
