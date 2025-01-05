@@ -170,6 +170,27 @@ DEFAULT 설명에 따르면, 본인이 사용하는 DB의 기본 격리 수준�
     </tr>
 </table>
 
+<details>
+<summary><b> REPEATABLE READ 자세히 보기(알고 싶나?) </b></summary>
+<div markdown="1">
+일반적인 RDBMS는 변경 전의 레코드를 언두(Undo) 공간에 백업한다. 그렇기에 변경 전/후 데이터가 모두 존재하고, 동일한 레코드에 대해 여러 버전의 데이터가 존재한다고 하여 이를 <b> MVCC(Multi-Version Concurrency Control, 다중 버전 동시성 제어)</b>라고 부른다.
+MVCC는 트랜잭션이 롤백된 경우 데이터를 복원 가능하게 하고, 서로 다른 트랜잭션 간에 접근할 수 있는 데이터를 세밀하게 제어할 수 있다.
+각 트랜잭션은 순차 증가하는 고유 트랜잭션 번호가 주어지며, 백업 레코드에는 어느 트랜잭션에 의해 백업되었는지 트랜잭션 번호를 함께 저장한다. (데이터가 불필요해 진다고 판단하는 시점에 주기적으로 백그라운드 쓰레드를 통해 삭제)
+
+<img src="https://github.com/user-attachments/assets/673ec65d-c8e2-4679-8811-9d00f34560e1" alt="image" />
+위의 예시를 보면 사용자 B가 조회를 먼저 하고, 사용자 A가 id=50인 레코드를 갱신하는 상황이다.
+이 경우 MVCC를 통해 member 테이블의 MangKyu값은 MinKyu로 변경되지만, 백업된 데이터가 언두 로그에 남게 된다.
+사용자 B가 다시 같은 트랜잭션에서 조회를 할 때, MangKyu를 조회하는 이유는 REPEATABLE READ는 트랜잭션 번호를 참고하여 자신보다 먼저 실행된 트랜잭션의 데이터만을 조회하기 때문이다. MinKyu 데이터는 트랜잭션 번호가 12번으로 사용자 B의 트랜잭션 번호 10번 보다 크기 때문에 언두 로그를 참고해 MangKyu 데이터를 조회해 반환한다.
+<b> 즉, REPEATABLE READ는 어떤 트랜잭션이 읽은 데이터를 다른 트랜잭션이 수정하더라도 동일한 결과를 반환할 것을 보장해준다. </b>
+
+REPEATABLE READ는 새로운 레코드의 추가는 막지 않는다. 그렇기에 SELECT로 조회한 경우 트랜잭션이 끝나기 전 다른 트랜잭션에 의해 추가된 레코드가 발견되는 유령 읽기(Phantom Read)가 발생할 수 있다.
+
+<img src="https://github.com/user-attachments/assets/d94a3c35-2238-4829-a89b-e9f9d54d911a" alt="image" />
+
+
+</div>
+</details>
+
 <h2>왜 MySQL만 DEFAULT 설정이 REPEATABLE READ인가 → 갭 락이란?</h2>
 
 <h3>MySQL의 스토리지 엔진 레벨의 락</h3>
