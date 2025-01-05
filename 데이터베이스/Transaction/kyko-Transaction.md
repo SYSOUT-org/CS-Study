@@ -220,3 +220,5 @@ MySQL에서는 사용자 B가 SELECT FOR UPDATE로 데이터를 조회한 경우
 <h2>왜 MySQL만 DEFAULT 설정이 REPEATABLE READ인가 → 갭 락이란?</h2>
 나중에 개인 블로그에서 따로 정리하려고 합니다...
 
+## 참고자료
+https://mangkyu.tistory.com/299
