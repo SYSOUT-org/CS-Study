@@ -248,12 +248,6 @@ Undo Log는 Undo Log Buffer 형태로 메모리에 저장, 특점 시점에 디�
 - MVCC를 통해 특정 시점에서의 테이블 데이터를 불러올 수 있다. 트랜잭션에서 특정 레코드를 조회하면 해당 레코드 트랜잭션 번호를 참고해 자신보다 먼저 실행된 트랜잭션의 데이터만을 조회한다.
 
 <hr style="width: 50%;"/>
-
-**💡 Exclusive Lock - 배타적 잠금/쓰기 잠금**
-- Oracle의 Non Repeatable Read 문제 해결 방법
-- 특정 레코드나 테이블에 대해 다른 트랜잭션에서 읽기, 쓰기 작업을 허용하지 않는 Lock
-
-<hr style="width: 50%;"/>
 </br>
 
 🤔 Oracle은 REPEATABLE READ를 지원하지 않는다! 그럼 어떤 방법으로 해결할까?
