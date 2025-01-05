@@ -164,7 +164,6 @@ COMMIT; -- 트랜잭션을 DB에 적용
 
 
 ​
-
 ### 2️⃣ READ COMMITTED (커밋된 읽기)
 
 <img src="https://github.com/user-attachments/assets/932af5f3-4a99-4ca6-a03f-0d6d42db60d2" alt="READ COMMITTED" width="800"/>
@@ -200,6 +199,7 @@ Undo Log는 Undo Log Buffer 형태로 메모리에 저장, 특점 시점에 디�
 🤨그런데 Undo Log가 과도하게 쌓이면 잠금 없는 일관된 읽기를 위해 탐색 비용이 발생해 읽기 성능이 떨어지게 되고, 다른 트랜잭션들이 동일한 자원을 필요로 하는 경우 데드락이 발생할 가능성이 높아진다. 따라서 트랜잭션 단위를 짧게 가져가야 하는 이유를 Undo 개념과 함께 이해할 수 있다.
 
 <hr style="width: 50%;"/>
+</br>
 
 🤔 그렇다면 이번 격리 수준은 문제가 없을까?
 
@@ -211,9 +211,10 @@ Undo Log는 Undo Log Buffer 형태로 메모리에 저장, 특점 시점에 디�
     - 5번 트랜잭션이 commit이나 rollback이 될 때까지 2번 트랜잭션의 실행을 지연하는 것 (Oracle)
     - Multiversion Concurrency Control(MVCC)을 사용하는 REPEATABLE READ를 사용하는 것 (MySQL)
 </br>
+
 ​
 
-### 3️⃣ REPEATABLE READ (반복 가능한 읽기)
+### 3️⃣ REPEATABLE READ (반복 가능한 읽기) - MySQL
 
 <img src="https://github.com/user-attachments/assets/e6f6b880-c404-440a-b1ff-27082b287a12" alt="REPEATABLE READ" width="800"/>
 
@@ -231,17 +232,70 @@ Undo Log는 Undo Log Buffer 형태로 메모리에 저장, 특점 시점에 디�
 
 <hr style="width: 50%;"/>
 
-💡 Exclusive Lock - 배타적 잠금/쓰기 잠금 
+**💡 Exclusive Lock - 배타적 잠금/쓰기 잠금**
 - Oracle의 Non Repeatable Read 문제 해결 방법
 - 특정 레코드나 테이블에 대해 다른 트랜잭션에서 읽기, 쓰기 작업을 허용하지 않는 Lock
 
 <hr style="width: 50%;"/>
+</br>
 
-🤔 그렇다면 이번엔 어떤 문제가 발생할 수 있을까?
+🤔 Oracle은 REPEATABLE READ를 지원하지 않는다! 그럼 어떤 방법으로 해결할까?
+</br></br>
 
-미완~
 
 
+### #️⃣ Exclusive Lock (배타적 잠금/쓰기 잠금) - Oracle
+
+<img src="https://github.com/user-attachments/assets/43e6f566-0ebe-4367-9527-99434a6ea145" alt="Oracle - Exclusive Lock" width="800"/>
+
+- Oracle의 Non Repeatable Read 문제 해결 방법
+- 특정 레코드나 테이블에 대해 다른 트랜잭션에서 읽기, 쓰기 작업을 허용하지 않는 Lock
+- 2번 트랜잭션에서 select를 실행함과 동시에 락이 걸린다. 동일한 레코드에 5번 트랜잭션이 접근할 때, Lock이 풀릴 때까지 대기해야 된다. 따라서 2번 트랜잭션에서 동일한 select 쿼리를 실행했을 때, 같은 결과가 조회되는 것을 확인할 수 있다.
+- 락이 걸려있는 상황에도 Undo 영역 select는 가능! (MVCC)
+</br>
+
+💥 PHANTOM READ 발생
+- Exclusive Lock은 update, delete에 대한 Lock은 걸 수 있지만, insert에 대한 Lock은 걸 수 없다. 이는 최조 조회된 레코드에 대해서만 락을 걸기 때문에, 추가할 레코드에 대해서는 Lock을 걸지 않는다.
+- 따라서 처음엔 조회되지 않았던 데이터가 Lock과 관련없이 갑자기 조회될 수 있다는 것이다. (유령처럼!)
+- 이를 Phantom Read라고 한다.
+
+
+</br>
+
+🤔 MySQL은 Phantom Read가 발생하지 않는다! 왤까?
+
+👉 InnoDB 엔진을 사용하는 MySQL 에서는 Next Key Lock 방식을 사용하기 때문이다.
+
+</br>
+ <hr style="width: 50%;"/>
+
+ **💡 Next Key Lock vs Exclusive Lock**
+- 잠금 범위와 목적에 차이가 있다.
+- Next Key Lock 
+    - = Record Lock + Gap Lock 개념으로, 레코드와 간격 범위를 동시에 잠근다.
+    - 범위에 대한 데이터 일관성을 보장, 팬텀 리드(범위 내 데이터 삽입)를 방지하기 위해 사용
+- Exclusive Lock 
+    - 단일 레코드에 대해서만 잠근다. 
+    - 해당 레코드의 독점적 수정을 보장, 다른 트랜잭션이 이 레코드를 읽거나 수정하는 것을 방지
+
+ <hr style="width: 50%;"/>
+</br></br>
+
+
+ ### 4️⃣ SERIALIZABLE (직렬화 가능)
+
+- 가장 높은 수준의 격리로, 트랜잭션을 무조건 순차적으로 진행시킨다. 
+- 다른 트랜잭션이 절대 접근할 수 없고, 중간에 끼어들 수 없도록 원천 차단한다.
+- select는 Shared Lock(공유 잠금), insert, update, delete는 Exclusive Lock(or Next Key Lock) 건다.
+- 동시 처리가 불가능하여 처리 속도가 느려진다.
+
+<img src="https://github.com/user-attachments/assets/6232d70a-6278-4eb2-a4d4-e3df275f7c0d" alt="격리 수준에 따른 동시성, 일관성 변화" width="400"/>
+
+
+😮 격리 수준이 높아질수록 데이터 정합성이 잘 지켜지지만, 동시성이 떨어지는 것을 알 수 있다.
+</br></br>
+
+ 
 --- 
 🔗 참고링크
 <small>
