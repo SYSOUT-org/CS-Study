@@ -39,8 +39,24 @@
 ​
 
 👉 위의 내용을 코드 실습으로 살펴본다.
+</br>
 
-​
+
+- TCL (트랜잭션 제어어)
+  - BEGIN or START TRANSACTION
+  - ROLLBACK
+  - COMMIT
+  - SAVEPOINT
+</br>
+
+- MySQL 트랜잭션 실습을 위해 자동 커밋 설정 끄기
+```sql
+-- 설정 확인
+SELECT @@AUTOCOMMIT;
+-- 오토커밋 off
+SET AUTOCOMMIT = 0;
+```
+</br>
 
 테스트 테이블 TBL_USER을 사용한다.
 
@@ -159,7 +175,7 @@ COMMIT; -- 트랜잭션을 DB에 적용
 
 💥 DIRTY READ 발생
 - 2번 트랜잭션이 데이터를 조회한 후, 5번 트랜잭션이 오류가 발생하여 ROLLBACK을 하게 된다면 데이터 부정합을 발생시킬 수 있다.
-- 이와 같이 완료되지 않은 작업에 다른 트랜잭션이 접근하여 동시에 데이터를 읽는 문제를 더티읽기(Dirty Read)라고 한다.
+- 이와 같이 완료되지 않은 작업에 다른 트랜잭션이 접근하여 동시에 데이터를 읽는 문제를 오손 읽기(Dirty Read)라고 한다.
 </br>
 
 
@@ -207,7 +223,8 @@ Undo Log는 Undo Log Buffer 형태로 메모리에 저장, 특점 시점에 디�
 
 💥 NON-REPEATABLE READ 발생 
 - 2번 트랜잭션에서 동일한 select 쿼리를 실행했을 때, 다른 결과가 조회되는 것을 알 수 있다. 5번 트랜잭션의 커밋 전, 후에 select 쿼리를 실행했기 때문이다. 
-- 이는 트랜잭션의 일관성을 해치는 문제로, 두 가지 해결 방법이 존재한다. 
+- 이는 트랜잭션의 일관성을 해치는 문제로 반복 불가능 읽기(non-repeatable read)라고 한다.
+- 두 가지 해결 방법이 존재한다. 
     - 5번 트랜잭션이 commit이나 rollback이 될 때까지 2번 트랜잭션의 실행을 지연하는 것 (Oracle)
     - Multiversion Concurrency Control(MVCC)을 사용하는 REPEATABLE READ를 사용하는 것 (MySQL)
 </br>
@@ -257,7 +274,7 @@ Undo Log는 Undo Log Buffer 형태로 메모리에 저장, 특점 시점에 디�
 💥 PHANTOM READ 발생
 - Exclusive Lock은 update, delete에 대한 Lock은 걸 수 있지만, insert에 대한 Lock은 걸 수 없다. 이는 최조 조회된 레코드에 대해서만 락을 걸기 때문에, 추가할 레코드에 대해서는 Lock을 걸지 않는다.
 - 따라서 처음엔 조회되지 않았던 데이터가 Lock과 관련없이 갑자기 조회될 수 있다는 것이다. (유령처럼!)
-- 이를 Phantom Read라고 한다.
+- 이를 유령 데이터 읽기(Phantom Read)라고 한다.
 
 
 </br>
