@@ -14,8 +14,7 @@
 
 ---
 ## ✨ 트랜잭션 상태
-
-<트랜잭션 상태 이미지>
+<img src="https://github.com/user-attachments/assets/0a877bc9-216a-4dc3-b6b9-a4c5075a8fe5" alt="트랜잭션 상태" width="700"/>
 
 - **활성(Active)**
     - 트랜잭션이 정상적으로 실행 중인 상태
@@ -47,8 +46,7 @@
 
 테스트 테이블 TBL_USER을 사용한다.
 
-<TBL_USER 초기 상태 이미지 이미지>
-
+<img src="https://github.com/user-attachments/assets/e603a262-1efa-4e4b-80dc-d35968da5c6a" alt="TBL_USER 초기 상태" width="400"/>
 
 ```sql
 -- 활성(Active)
@@ -58,7 +56,7 @@ select * from TBL_USER; -- 초기 상태 확인
 insert into TBL_USER values('10104', '홍길동', 'D', 'Y', 30, 'M'); -- 데이터1 추가
 select * from TBL_USER; -- 데이터1 추가 상태 확인
 ```
-<데이터1 추가 상태 이미지>
+<img src="https://github.com/user-attachments/assets/f83393cf-bf4d-49a5-9b79-12967e36e6db" alt="데이터1 추가 상태" width="400"/>
 
 ```sql
 SAVEPOINT save_point; -- save_point 지정
@@ -66,21 +64,21 @@ SAVEPOINT save_point; -- save_point 지정
 insert into TBL_USER values('10105', '김갑수', 'A', 'N', 42, 'M'); -- 데이터2 추가
 select * from TBL_USER; -- 데이터2 추가 상태 확인
 ```
-<데이터2 추가 상태 이미지>
+<img src="https://github.com/user-attachments/assets/a55c3cef-34a8-4879-8326-2dbc556247d5" alt="데이터2 추가 상태" width="400"/>
 
 ```sql
 -- 철회(Aborted)
 ROLLBACK TO save_point; -- save_point 실행 전 상태로 롤백함
 select * from TBL_USER; -- 데이터2 없는 상태 확인
 ```
-<save_point 실행 전 상태로 롤백 이미지>
+<img src="https://github.com/user-attachments/assets/faa5e2d8-b5a4-439e-b5d9-b18bff1231bf" alt="save_point 실행 전 상태로 롤백" width="400"/>
 
 ```sql
 -- 철회(Aborted)
 ROLLBACK; -- 트랜잭션을 취소하고 START TRANSACTION 실행 전 상태로 롤백
 select * from TBL_USER; -- 초기 상태 확인
 ```
-<TBL_USER 초기 상태 이미지>
+<img src="https://github.com/user-attachments/assets/e603a262-1efa-4e4b-80dc-d35968da5c6a" alt="TBL_USER 초기 상태" width="400"/>
 
 ```sql
 -- 부분완료(Partially Committed)
@@ -91,7 +89,7 @@ COMMIT; -- 트랜잭션을 DB에 적용
 
 -- 완료(Committed)
 ```
-<데이터3 추가 상태 이미지>
+<img src="https://github.com/user-attachments/assets/eb511dfa-7f44-4fec-9499-196677b1c241" alt="데이터3 추가 상태" width="400"/>
 
 </br></br>
 
@@ -150,30 +148,31 @@ COMMIT; -- 트랜잭션을 DB에 적용
 
 ### 1️⃣ READ UNCOMMITTED (커밋되지 않은 읽기)
 
-<READ UNCOMMITTED 이미지>
+<img src="https://github.com/user-attachments/assets/2cb4bf43-342b-4bb4-9fcf-63495c6b5bad" alt="READ UNCOMMITTED" width="800"/>
 
 - 5번 트랜잭션이 커밋되지 않은 시점에서, 2번 트랜잭션이 변경된 데이터에 접근할 수 있다.
 - 가장 낮은 수준의 격리 수준으로 일반적으로 사용하지 않는다.
 - 🤔 위의 격리 수준을 사용했을 때 어떤 문제가 발생할 수 있을까?
+</br>
 
-
-<READ UNCOMMITTED - DIRTY READ 이미지>
+<img src="https://github.com/user-attachments/assets/02fcfa56-a964-42cb-bc3f-91e0aa9bb5aa" alt="READ UNCOMMITTED - DIRTY READ" width="800"/>
 
 💥 DIRTY READ 발생
 - 2번 트랜잭션이 데이터를 조회한 후, 5번 트랜잭션이 오류가 발생하여 ROLLBACK을 하게 된다면 데이터 부정합을 발생시킬 수 있다.
 - 이와 같이 완료되지 않은 작업에 다른 트랜잭션이 접근하여 동시에 데이터를 읽는 문제를 더티읽기(Dirty Read)라고 한다.
-
+</br>
 
 
 ​
 
 ### 2️⃣ READ COMMITTED (커밋된 읽기)
 
-<READ COMMITTED 이미지>
+<img src="https://github.com/user-attachments/assets/932af5f3-4a99-4ca6-a03f-0d6d42db60d2" alt="READ COMMITTED" width="800"/>
 
 - 2번 트랜잭션은 커밋된 5번 트랜잭션 데이터만 접근 가능하다.
 - MySQL을 제외하고 대부분 이를 기본 격리 수준으로 사용한다.
 - 5번 트랜잭션이 데이터를 '김두리'로 update 한 후 Commit 하지 않았을 때, 2번 트랜잭션은 update 전인 '김하나'라는 값을 조회한다. 이는 Undo 개념 때문이다.
+</br>
 
 <hr style="width: 50%;"/>
 
@@ -181,11 +180,8 @@ COMMIT; -- 트랜잭션을 DB에 적용
 
 트랜잭션은 로그가 반드시 남고, 복구는 로그를 기반으로 처리된다. 로그는 크게 두 가지가 있다.
 
-
-<REDO 이미지>
-
-
-<UNDO 이미지>
+<img src="https://github.com/user-attachments/assets/b77dac73-8a6b-4720-9c27-011f2b0e294e" alt="REDO" width="600"/>
+<img src="https://github.com/user-attachments/assets/c0590d7e-9ecd-4649-b358-d87e2681147f" alt="UNDO" width="600"/>
 
 - Redo Log 
   - 다시 실행의 뜻, 오류에 의한 복구에 사용 
@@ -194,7 +190,7 @@ COMMIT; -- 트랜잭션을 DB에 적용
 - Undo Log 
   - 실행 취소의 뜻, 롤백을 위해 사용 
   - 변경전 값과 이에 대한 PK를 가지고 있다.
-
+</br>
 ​
 
 😮UNDO 영역이라고 말한 이유?
@@ -207,25 +203,24 @@ Undo Log는 Undo Log Buffer 형태로 메모리에 저장, 특점 시점에 디�
 
 🤔 그렇다면 이번 격리 수준은 문제가 없을까?
 
-
-<READ COMMITTED - NON-REPEATABLE READ 이미지>
+<img src="https://github.com/user-attachments/assets/6c97db60-478d-4503-a710-d1fcb9dea2a6" alt="READ COMMITTED - NON-REPEATABLE READ" width="800"/>
 
 - 💥 NON-REPEATABLE READ 발생 
   - 2번 트랜잭션에서 동일한 select 쿼리를 실행했을 때, 다른 결과가 조회되는 것을 알 수 있다. 5번 트랜잭션의 커밋 전, 후에 select 쿼리를 실행했기 때문이다. 
   - 이는 트랜잭션의 일관성을 해치는 문제로, 두 가지 해결 방법이 존재한다. 
     - 5번 트랜잭션이 commit이나 rollback이 될 때까지 2번 트랜잭션의 실행을 지연하는 것 (Oracle)
     - Multiversion Concurrency Control(MVCC)을 사용하는 REPEATABLE READ를 사용하는 것 (MySQL)
-
+</br>
 ​
 
 ### 3️⃣ REPEATABLE READ (반복 가능한 읽기)
 
-
-<REPEATABLE READ 이미지>
+<img src="https://github.com/user-attachments/assets/e6f6b880-c404-440a-b1ff-27082b287a12" alt="REPEATABLE READ" width="800"/>
 
 - 자신보다 낮은 트랜잭션 번호에서 커밋한 데이터만 읽을 수 있는 격리 수준이다.
 - 2번 트랜잭션은 2보다 작은 번호의 트랜잭션에서 커밋한 데이터만 읽을 수 있기 때문에, 5번 트랜잭션에서 변경한 내용은 조회할 수 없다. 따라서 2번 트랜잭션에서 동일한 select 쿼리를 실행했을 때, 같은 결과가 조회되는 것을 확인할 수 있다.
 - 이는 트랜잭션 ID를 통해 Undo 영역의 데이터를 스냅샷처럼 관리하여 동일한 데이터를 보장하는 MVCC 때문이다.
+</br>
 
 <hr style="width: 50%;"/>
 
