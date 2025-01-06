@@ -98,7 +98,7 @@
 
 - 특정 트랜잭션 작업이 완료되지 않았지만 다른 트랜잭션에서 변경된 데이터를 읽는 상황
 
-![img_2.png](img_2.png)
+![dirtyread](https://velog.velcdn.com/images/shasha/post/27f8fb66-9f8c-4a16-a787-7715fb18ca38/image.png)
 </div>
 </details>
         
@@ -119,8 +119,7 @@
 - 트랜잭션에서 같은 쿼리 2번을 실행했으나 결과가 다른 현상
 - 쿼리 호출 사이에 타 트랜잭션이 개입하여 ***일관성(ACID의 Consistency)*** 위반
 
-![img_1.png](img_1.png)
-
+![NonRepeatableRead](https://velog.velcdn.com/images/shasha/post/1efafadb-a1e1-421a-853b-dbb65e23349c/image.png)
 </div>
 </details>
         
@@ -140,7 +139,7 @@
   - ***일관성(ACID의 Consistency)*** 위반
 - 쿼리 호출 사이에 타 트랜잭션이 개입하여 ***일관성(ACID의 Consistency)*** 위반
 
-![img_3.png](img_3.png)
+![PhantomRead](https://velog.velcdn.com/images/shasha/post/68fecb14-c0e4-437a-8c45-9efc505aab00/image.png)
 
 </div>
 </details>
