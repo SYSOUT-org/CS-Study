@@ -30,7 +30,7 @@
 
 ## 트랜잭션의 상태
 
-![img_5.png](heogeonho-Transaction/img_5.png)
+![image](https://github.com/user-attachments/assets/547ade73-045c-4644-924c-9801696835d3)
 
 1. **Active**: 트랜잭션이 실행 중.
 2. **Partially Committed**: 작업이 완료되었으나 영구적이지 않은 상태.
@@ -72,7 +72,8 @@
 ## 데이터 무결성 문제 사례와 해결
 
 ### Dirty Write (더티 라이트)
-![img_1.png](heogeonho-Transaction/img_1.png)
+![image](https://github.com/user-attachments/assets/d552a741-c977-4d3c-949c-68bbc581e9da)
+
 
 - **사례**:
    - 트랜잭션 A와 트랜잭션 B가 같은 데이터를 동시에 수정.
@@ -85,7 +86,8 @@
 ---
 
 ### Read Skew (읽기 왜곡)
-![img_2.png](heogeonho-Transaction/img_2.png)
+![image](https://github.com/user-attachments/assets/8ad6a25b-cceb-46cd-8d7c-08c62e020f7d)
+
 
 - **사례**:
    - 트랜잭션 A가 읽은 데이터가 트랜잭션 B에 의해 수정되거나 삭제.
@@ -109,7 +111,7 @@
 ---
 
 ### **Lost Update (변경 유실)**
-![img_3.png](heogeonho-Transaction/img_3.png)
+![image](https://github.com/user-attachments/assets/b0f2d831-ddf9-49c1-ade8-d60c66475ab1)
 
 - **사례**:
    - 두 트랜잭션이 동시에 같은 데이터를 수정.
@@ -136,7 +138,8 @@
 ## InnoDB에서의 트랜잭션 처리 흐름
 
 InnoDB?
-![img.png](heogeonho-Transaction/img.png)
+![image](https://github.com/user-attachments/assets/47c6e23e-fbce-431e-ba80-b9d75c989010)
+
 
 
 1. **트랜잭션 시작**: Undo Log 준비.
@@ -252,7 +255,7 @@ public class OrderService {
 # 개인적으로 추가 고민거리
 결제 로직을 구현하면서 해당 부분에 대한 처리 방식에 대해 고민이 많았음
 
-![img_4.png](heogeonho-Transaction/img_4.png)
+![image](https://github.com/user-attachments/assets/3941a768-8aa2-48a2-9cc3-75cae21fca33)
 위 상황에서의 롤백 처리 시나리오에 대해 고민의 필요성을 느껴 추가 과제로 해보려고 함
 추가로 Lock관련 내용과 @Transactional의 내부 동작을 알아보다가 시간 관계상 내용을 담지 못했는데 추후 추가 포스팅 해보겠습니다.
 
