@@ -64,6 +64,7 @@
 ---
 
 # Isolation Level
+- 여러 트랜잭션이 동시에 처리될 때, 특정 트랜잭션이 다른 트랜잭션에서 변경하거나 조회하는 데이터를 볼 수 있게 허용할지 여부를 결정하는 것이다.
 
 ## 1. Read-Uncommitted
 - 아직 Commit되지 않은 데이터를 읽을 수 있다.
@@ -98,12 +99,13 @@
 - **Phantom Read**: 새로운 데이터가 추가되거나 기존 데이터가 사라지는 문제
 
 ---
-
 ## 4. Serializable
-- 트랜잭션이 순차적으로 실행되며, 가장 엄격한 격리 수준이다.
+- 가장 엄격한 격리 수준으로, 트랜잭션이 순차적으로 실행된다
+- 어떤 부정합 문제도 발생하지 않으나 동시 처리 성능이 매우 떨어진다.
 
 ---
 
 # 참고자료
 - [YouTube 1](https://www.youtube.com/watch?v=bLLarZTrebU&t=25s)
 - [YouTube 2](https://www.youtube.com/watch?v=sLJ8ypeHGlM&list=PLcXyemr8ZeoREWGhhZi5FZs6cvymjIBVe&index=15)
+- [망나니 개발자] (https://mangkyu.tistory.com/299)
