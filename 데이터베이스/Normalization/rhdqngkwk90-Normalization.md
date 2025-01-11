@@ -96,9 +96,9 @@ Week 2 of Jan
 
 **💥 삽입/수정/삭제 이상**
 새로운 과목이 추가될 때 해당 과목을 수강하는 학생 정보까지 함께 입력해야 한다.
-이런 방식은 데이터 중복이 발생한다.
+이런 방식은 **데이터 중복**이 발생한다.
 
-<img src="https://github.com/user-attachments/assets/209c188a-09ac-4edf-a7df-36a6f3a5dd6b" alt="제 2정규형 적용 후" width="700"/>
+<img src="https://github.com/user-attachments/assets/3ed9faef-62a2-4804-aa0a-0abdd206c95b" alt="제 2정규형 적용 후" width="700"/>
 
 ###### <제 2정규형 적용 후>
 👉 키의 부분집합에 의존하는 컬럼들을 테이블로 분리하고, 그 사이의 관계를 설정하는 관계 테이블을 생성한다.
@@ -119,7 +119,17 @@ A → B (종속) 이고 B → C (종속) 이라면 A → C (종속) 인 형태
 
 
 공학인증 여부는 공학인증 번호에 종속되는 개념이다.
-과목 ID를 통해 간접적으로 종속되어 있기 때문에 전부 분리해준다.
+과목 ID를 통해 간접적으로 종속되어 있기 때문에 분리해준다.
+
+<img src="https://github.com/user-attachments/assets/5c58ba9b-50ec-479d-8593-f3ee5bb2dede" alt="제 3정규형 적용 후" width="700"/>
+
+###### <제 3정규형 적용 후>
+
+--- 
+**🤔 그 이후 단계는?**
+
+대부분의 데이터베이스 설계에서는 1NF, 2NF, 3NF까지 가장 많이 적용된다.
+- BCNF, 4NF, 5NF : 일부 고급 설계나 복잡한 데이터베이스 시스템에서 필요한 경우 적용한다.
 
 
 
@@ -148,6 +158,22 @@ A → B (종속) 이고 B → C (종속) 이라면 A → C (종속) 인 형태
 - 설명
   한 명의 디자이너는 3개의 포트폴리오를 가질 수 있다.
   하나의 포트폴리오에는 1개의 동영상과 3개의 이미지를 업로드할 수 있다.
+
+<img src="https://github.com/user-attachments/assets/a6653b65-8549-454d-97b4-e7c1e90476ed" alt="디자이너 테이블" width="400"/>
+
+###### <디자이너 테이블>
+
+<img src="https://github.com/user-attachments/assets/aa2d8485-598a-4093-8d4a-0bffdc6d97f3" alt="포트폴리오 테이블" width="400"/>
+
+###### <포트폴리오 테이블>
+
+<img src="https://github.com/user-attachments/assets/0bbb9bb1-2c5a-468d-bfe3-21d61020e412" alt="포트폴리오 이미지 테이블" width="400"/>
+
+###### <포트폴리오 이미지 테이블>
+
+<img src="https://github.com/user-attachments/assets/cc4b902b-d8cf-426d-b81f-c44d0c982624" alt="테이블 관계" width="400"/>
+
+###### <테이블 관계>
 
 -> 미완
 
