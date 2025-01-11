@@ -1,7 +1,7 @@
 # 서론
 
 <aside>
-<img src="/icons/heart_purple.svg" alt="/icons/heart_purple.svg" width="40px" />
+
 
 고객 관리 시스템에서 고객 정보가 여러 테이블에 중복 저장된 상황을 가정해 보겠습니다.
 
@@ -17,7 +17,7 @@
 # 정의
 
 <aside>
-<img src="/icons/heart_purple.svg" alt="/icons/heart_purple.svg" width="40px" />
+
 
 정규화는 테이블 간의 데이터 중복을 허용하지 않는 것을 기본 목표로 삼습니다.
 
@@ -44,7 +44,8 @@
 
 다음과 같이 정규화를 진행하면 삽입 이상을 방지할 수 있다.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/03205dcf-f90c-4bd9-8281-674e7b939609/3dd248ba-ed5d-4b05-aa2b-a43a3ad3d98b/image.png)
+![image](https://github.com/user-attachments/assets/6805e284-2c25-44a5-b8f5-31503f2991a4)
+
 
 ### 삭제 이상(Deletion Anomaly)
 
@@ -61,7 +62,8 @@
 
 ### 정규화의 종류
 
-![https://en.wikipedia.org/wiki/Database_normalization](https://prod-files-secure.s3.us-west-2.amazonaws.com/03205dcf-f90c-4bd9-8281-674e7b939609/75728a3f-14e0-4f01-a729-89f1145eddde/image.png)
+![image](https://github.com/user-attachments/assets/30abe99e-9a56-491f-afc1-5d7aac6303f5)
+
 
 https://en.wikipedia.org/wiki/Database_normalization
 
@@ -92,7 +94,6 @@ https://en.wikipedia.org/wiki/Database_normalization
 - 즉, 필요한 정보가 한 테이블에 모두 있는 것이 아니기 때문에 조인 연산이 증가할 것이다. 즉, 각 테이블에서 조건에 맞는 데이터를 계속해서 스캔해야 한다는 것이다.
 
 <aside>
-<img src="/icons/heart_purple.svg" alt="/icons/heart_purple.svg" width="40px" />
 
 다음과 같이 주문 관리 조회를 예시로 들어본다.
 
