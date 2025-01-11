@@ -156,7 +156,6 @@ WHERE c.customer_id = 123;
 ## 실무적 접근
 
 <aside>
-<img src="/icons/heart_purple.svg" alt="/icons/heart_purple.svg" width="40px" />
 
 Trade-Off를 생각한다는 것은 곧 실무에서의 요구치를 어떻게 받아들여야 하는 것이다.
 
