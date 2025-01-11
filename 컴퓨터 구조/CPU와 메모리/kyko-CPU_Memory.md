@@ -49,5 +49,5 @@
 - **첨부 내용**:
 
 #### **허건호**  
-- **정리 자료**: [블로그 링크](https://example.com)  
-- **첨부 내용**: 추가 예정
+- **정리 자료**: [cpu와 메모리](https://geonho-workspace.notion.site/SYSOUT-CPU-175fd36175dc8023920ecccf197fdfda?pvs=4)
+- **첨부 내용**:
