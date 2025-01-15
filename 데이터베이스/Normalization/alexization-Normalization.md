@@ -127,6 +127,7 @@
 즉, 기본키의 일부 속성에만 의존하고 있기 때문이다.
 
 ![Screenshot 2025-01-13 at 2 50 41 AM](https://github.com/user-attachments/assets/19140f0e-4542-41a7-b68e-f71410e998d4)
+
 **발생할 수 있는 이상 현상**
 
 1. 삽입 이상
@@ -179,11 +180,13 @@
 ### 제3 정규화 적용 전 문제점
 
 ![Screenshot 2025-01-13 at 2 35 52 AM](https://github.com/user-attachments/assets/7cfd36d8-cf08-4578-9948-ff2c6eaecad3)
+
 *제3 정규화 적용 전 쿠폰 테이블*
 
 ### 제3 정규화 적용 후
 
 ![Screenshot 2025-01-13 at 2 36 16 AM](https://github.com/user-attachments/assets/480156a4-6437-4d58-8b30-961b993374f7)
+
 *제3 정규화 적용 후 테이블 (제3 정규형 테이블)*
 
 - 각 테이블은 원자적인 값을 가지게 되고 데이터 중복이 줄어든다.
