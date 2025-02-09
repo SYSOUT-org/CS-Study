@@ -100,7 +100,6 @@ Lock은 **적용 범위에 따라** 네 가지 수준(Level)으로 구분됨.
 
 
 ## 🔹 3. Lock의 유형
-
 Lock은 목적과 사용 방식에 따라 여러 가지 유형으로 구분될 수 있음
   
 | Lock 유형                             | 설명                                                      | 특징                             |
@@ -112,6 +111,63 @@ Lock은 목적과 사용 방식에 따라 여러 가지 유형으로 구분될 �
 | Shared Intent Exclusive (SIX) Lock	 | 하위 레벨에서 Shared Lock을 사용하면서, 일부 데이터에만 Exclusive Lock을 사용 | 	한 번에 하나의 트랜잭션만 가능             |
 | Update (U) Lock	                    | 기존의 Shared Lock을 Exclusive Lock으로 변경하는 Lock             | 	Deadlock 방지 역할                |
 
+
+## 🔹 **4. Deadlock 개념과 회피 방법**
+### **Deadlock이란?**
+- 두 개 이상의 트랜잭션이 서로가 필요로 하는 리소스를 **Lock으로 점유하고 있는 상태에서**,  
+  **각각 다른 트랜잭션의 Lock이 풀리기를 기다리며 영원히 멈춰 있는 상태**를 의미함.
+- 즉, 서로 **상대방이 가진 Lock을 필요로 하는 상황에서 발생**하는 **교착 상태(Deadlock)**.
+
+- Deadlock은 **두 개 이상의 트랜잭션이 서로가 필요로 하는 리소스를 Lock으로 점유하고, 상대방의 Lock 해제를 기다리며 무한 대기하는 상황**에서 발생함.
+
+✔ **Deadlock이 발생하는 주요 원인**
+1. **Lock 순서 충돌**
+  - 서로 다른 트랜잭션이 **서로가 필요로 하는 리소스를 다른 순서로 Lock**을 획득하면서 충돌이 발생.
+  - 예:
+    - 트랜잭션 A → Row 1 Lock → Row 2 Lock 대기
+    - 트랜잭션 B → Row 2 Lock → Row 1 Lock 대기
+
+2. **트랜잭션 실행 시간이 길어짐**
+  - 트랜잭션이 **불필요하게 오래 실행**되면, 다른 트랜잭션이 필요한 리소스를 대기하는 시간이 길어지면서 Deadlock 위험 증가.
+
+3. **Lock 범위가 커지는 경우 (Table-Level Lock)**
+  - **Row-Level Lock보다 큰 단위(Table-Level Lock 등)를 사용하면 충돌이 증가**하여 Deadlock 가능성이 높아짐.
+
+4. **교착 상태 발생 (Circular Wait Condition)**
+  - 트랜잭션들이 서로가 가진 Lock을 기다리는 **순환 대기(Circular Wait)** 상태가 형성되면서 발생.
+  - 예:
+    - A는 자원 X를 점유하고 Y를 기다림.
+    - B는 자원 Y를 점유하고 X를 기다림.
+
+---
+
+### **Deadlock 회피 방법**
+Deadlock을 방지하기 위해 다음과 같은 기법을 사용할 수 있음.
+
+#### 1️⃣ 트랜잭션 수행 순서 조정
+#### 2️⃣ 짧은 트랜잭션 유지
+#### 3️⃣ Lock Timeout 설정
+#### 4️⃣ 낙관적 락 활용
+#### 5️⃣ Deadlock이 발생했을 때 트랜잭션을 자동 재시도하도록 설계
+
+---
+
+3️⃣에 대한 코드 예시
+
+MySQL
+
+```sql
+SET innodb_lock_wait_timeout = 10;
+```
+
+java
+```java
+try {
+    entityManager.setProperty("javax.persistence.lock.timeout", 5000); // 5초 대기 후 실패
+} catch (LockTimeoutException e) {
+    System.out.println("Deadlock 방지를 위해 트랜잭션 종료");
+}
+```
 
 
 ## 📌 **참고 자료**
