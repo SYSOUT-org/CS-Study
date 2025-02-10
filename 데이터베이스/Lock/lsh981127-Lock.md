@@ -35,8 +35,9 @@
     - 공유 Lock - **배타 Lock**
     - 배타 Lock - **공유 Lock**
     - 배타 Lock - **배타 Lock**
+    
+  ![image.png](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/7e598c9c-4f24-4084-947f-f707577a6999/image/w=1920,quality=90,fit=scale-down)
 
-![image.png](attachment:72641f25-27ea-4c39-89c5-9efa612bb8f6:image.png)
 
 - 위 예시에서 Blocking 상태의 트랜잭션 B는 **어떤 작업들도 실행하지 못하고 대기하는 상태**가 된다.
 
@@ -56,7 +57,7 @@
         - B는 트랜잭션 A가 Commit/Rollback 될때까지 대기
     - 즉, 서로가 서로의 종료를 기다리기에 서로의 블로킹 상태를 영원히 해결할 수 없는 상태가 된다.
 
-![image.png](attachment:8ab5ee27-2386-4dc7-a588-b8598f5a9735:image.png)
+    ![image.png](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/247486ae-c7f0-47eb-942a-e950c70702d2/image/w=1920,quality=90,fit=scale-down)
 
 위 그림은 데드락 상황에 대한 예시
 
@@ -106,7 +107,7 @@ JPA에서 낙관적 락을 사용하는 방법
 - 공유 락, 배타 락을 활용해 트랜잭션에 Blocking 상태를 만들어 동시성을 제어하는 방식
 - *Blocking 상태에서 사용한 그림 예시가 비관적 락의 예시*
 
-![image.png](attachment:8ab5ee27-2386-4dc7-a588-b8598f5a9735:image.png)
+![image.png](https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/247486ae-c7f0-47eb-942a-e950c70702d2/image/w=1920,quality=90,fit=scale-down)
 
 ### 생각
 
