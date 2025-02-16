@@ -6,10 +6,6 @@
 👉🏻 송신자가 수신자에게 IP 주소를 사용해서 데이터를 전달하고, 그 데이터가 어제대로 갔는지에 대해 이야기하는 것 
 - `HTTP (HyperText Transfer Protocol)` : 클라이언트와 서버가 서로 통신할 수 있게 하기 위한 언어를 정의하는 어플리케이션 규약   
 👉🏻 요청(Request)과 응답(Response)으로 이루어져있음, HTML 문서를 주고 받는데에 사용
-- `HTTPS (HyperText Transfer Protocol Secure)` : SSL/TLS 암호화를 통해 보안이 강화된 HTTP     
-👉🏻 데이터 암호화 및 무결성을 보장하며, TLS Handshake 과정을 통해 안전한 연결을 확립
-- `CDN (Content Delivery Network)` : 웹 콘텐츠(이미지, JS, CSS 등)를 빠르게 제공하기 위해 전 세계에 분산된 서버 네트워크    
-👉🏻 사용자와 가장 가까운 서버에서 데이터를 제공하여 로딩 속도를 최적화
 
 ### 📌 웹페이지 요청 및 응답 과정
 #### 1. 사용자가 웹브라우저 검색창에 `www.google.com` 입력
