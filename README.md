@@ -32,13 +32,25 @@
 
 - [Transaction](https://github.com/SYSOUT-org/CS-Study/tree/master/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/Transaction)
 
+- [Index](https://github.com/SYSOUT-org/CS-Study/tree/master/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/Index)
+
+- [Normalization](https://github.com/SYSOUT-org/CS-Study/tree/master/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/Normalization)
+
 
 ### 소프트웨어공학
 
 
 ### 운영체제
 
+- [process](https://github.com/SYSOUT-org/CS-Study/tree/master/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/process)
+
+
 
 ### 자료구조
+
+
+### 컴퓨터구조
+
+- [CPU와 메모리](https://github.com/SYSOUT-org/CS-Study/tree/master/%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0/CPU%EC%99%80%20%EB%A9%94%EB%AA%A8%EB%A6%AC)
 
 
