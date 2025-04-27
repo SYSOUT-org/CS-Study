@@ -9,24 +9,33 @@
 - 주문, 결제 요청 데이터는 저장이 잘 됐는데 pg결제 api 호출이 실패하면?
 - 사용자 돈은 결제됐는데, 주문은 실패한 상태가 된다면?
 
-여기서 넓은 의미로 분산 트랜잭션 문제가 발생합니다.
+여기서 분산 트랜잭션과 관련된 문제가 발생합니다.
 
 > 분산 트랜잭션?<br/>
-하나의 논리적 작업이 둘 이상의 독립된 시스템(리소스 관리자) 에 걸쳐 처리..
+하나의 논리적 작업이 둘 이상의 독립된 시스템(리소스 관리자) 에 걸쳐 처리
 
-트랜잭션 정합성이 요구되는 분산 환경(distributed consistency problem)이라고 볼 수 있습니다.
-
-## 대안
+## 분산 트랜잭션 처리 방안
 
 ### 1. 2PC (Two-Phase Commit)
+![image](https://github.com/user-attachments/assets/44f82fc9-2c5c-497f-8a7f-25c755844f63)
+
  - 여러 시스템이 동시에 Commit/Abort를 맞추는 방법
  - 문제: 외부 시스템(PSP)은 2PC를 지원하지 않음. 네트워크, 락 문제. 비현실적.
 
 ### 2. SAGA 패턴
+<img width="592" alt="image" src="https://github.com/user-attachments/assets/af61b1de-6de8-4c3a-861c-4acf6ec65b78" />
+
  - 각 서비스 트랜잭션 완료 후 실패 시 보상 트랜잭션 실행
  - 문제: PSP 결제는 “내가” 롤백할 수 없음. 결제 취소 실패 가능성 존재.
 
-### 3. Direct Call + Retry → 성공 시 DB 저장 트랜잭션 수행
+### 3. Outbox 패턴
+![image](https://github.com/user-attachments/assets/272ed71f-1e75-4942-abda-4955c212aef3)
+
+ - 주문 저장 트랜잭션 안에 “결제 요청 이벤트”를 함께 저장
+ - 커밋 이후 별도 프로세스가 외부 PG API 호출
+ - 장애 복구 가능, 정합성 보장
+
+### Plus. Direct Call + Retry → 성공 시 DB 저장 트랜잭션 수행
  ```java
  public void userPaymentRequest() {
      PaymentRequest request = createPaymentRequest();
@@ -47,12 +56,8 @@
  - 서버 부하/지연: PG 서버가 느리면 사용자도 몇 초~몇십 초 대기
  - 사용자 경험(UX) 나쁨: 결제 화면에서 오래 기다리다가 실패하면 매우 불쾌
  - 아키텍처 확장성 한계: 이벤트 기반 확장이 어려움 예를 들어 결제 완료 후 포인트 적립, 쿠폰 발급 등
-   
-### 4. Outbox 패턴
 
- - 주문 저장 트랜잭션 안에 “결제 요청 이벤트”를 함께 저장
- - 커밋 이후 별도 프로세스가 외부 PG API 호출
- - 장애 복구 가능, 정합성 보장
+
 
 ## 결제 처리에서 outbox 패턴
 
@@ -63,6 +68,7 @@
 
 
 ## Outbox 패턴 개념
+<img width="592" alt="image" src="https://github.com/user-attachments/assets/f22e6af9-b8b6-4d1c-82e0-e493e2d97f70" />
 
 >DB에 데이터 저장할 때 메시지도 함께 저장하고,<br/>
 나중에 안전하게 메시지를 꺼내서 보내는 방식이 Outbox 패턴<br/>
